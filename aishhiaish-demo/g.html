@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AishHiAish | Opening Shared Gallery...</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #fffaf8; color: #8f4e7c; font-family: Georgia, serif; text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <div>
+    <h2>AishHiAish Wedding Moments 🖼️</h2>
+    <p>Opening Shared Photo Gallery...</p>
+  </div>
+  <script>
+    const SB_URL = "https://wxzluylkxkbuesykwnov.supabase.co";
+    const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4emx1eWxreGtidWVzeWt3bm92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0MDgxNjUsImV4cCI6MjEwODk4NDE2NX0.rwxUgVejNCQCgziDuojTq8ycYK24z0C-Ytmc2Gfrtw8";
+    fetch(`${SB_URL}/rest/v1/profiles?phone=eq.SYSTEM_TUNNEL&select=display_name`, {
+      headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` }
+    })
+      .then(r => r.json())
+      .then(rows => {
+        const base = (rows && rows[0] && rows[0].display_name) ? rows[0].display_name : "http://localhost:3000";
+        window.location.replace(`${base}/g` + window.location.search);
+      })
+      .catch(() => {
+        window.location.replace("http://localhost:3000/g");
+      });
+  </script>
+</body>
+</html>
